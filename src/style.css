@@ -1,5 +1,7 @@
-h1 {
-  text-align: center;
+.container {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: brown;
+}
+ul {
+  list-style: none;
 }
