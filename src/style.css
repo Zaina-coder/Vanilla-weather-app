@@ -2,10 +2,12 @@ body {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #7b1fa2;
 }
-
-.weather-app {
+.wrapper {
   width: 600px;
   margin: 30px auto;
+}
+
+.weather-app {
   padding: 20px;
   border: 1px solid #dadded;
   border-radius: 10px;
@@ -29,33 +31,22 @@ li {
   margin: 0 auto;
   padding: 0;
 }
-.city-symbol {
-  width: 200px;
-  height: 250px;
+.overview {
+  margin-bottom: 20px;
 }
-.card {
-  width: 400px;
-  background-color: #f3e5f5;
+.weather-temp img {
+  margin-right: 6px;
+  float: left;
+  height: 64px;
+  width: 64px;
 }
-.symbol-img {
-  width: 40px;
-  height: 40px;
+.weather-temp strong {
+  color: blue;
+  line-height: 1;
+  font-size: 50px;
 }
-.block {
-  width: 20%;
-  background-color: #e1bee7;
-  cursor: pointer;
-  padding: 10px 0px;
-}
-
-.first-block {
-  border-bottom-left-radius: 5px;
-}
-
-.last-block {
-  border-bottom-right-radius: 5px;
-}
-block.active,
-.block:hover {
-  background-color: #ce93d8;
+.weather-temp .units {
+  position: relative;
+  font-size: 16px;
+  top: -34px;
 }
