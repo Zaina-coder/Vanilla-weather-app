@@ -27,6 +27,7 @@ li {
   color: rgd(135, 135, 135);
   font-size: 17px;
   font-weight: 200px;
+  text-transform: capitalize;
   line-height: 22px;
   margin: 0 auto;
   padding: 0;
@@ -43,7 +44,7 @@ li {
 .weather-temp strong {
   color: blue;
   line-height: 1;
-  font-size: 50px;
+  font-size: 40px;
 }
 .weather-temp .units {
   position: relative;
