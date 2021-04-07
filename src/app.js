@@ -45,7 +45,8 @@ function displayweather(response) {
    
 // making ajax call
 function search (city){ 
-let apiKey ="dbe2579a231e00f951c0c9e165264e61";
+    //has to end with C 
+let apiKey ="5f472b7acba333cd8a035ea85a0d4d4c";
 let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayweather);
  }
@@ -54,7 +55,7 @@ function formSubmit(event) {
     event.preventDefault();
      let cityInputElement = document.querySelector("#city-input");
      //to make the acutual search and fetch the data
-     search(cityInputElement);
+     search(cityInputElement.value);
    
 }
 
