@@ -30,8 +30,9 @@ function displayweather(response) {
    let dateElement=document.querySelector("#date");
    //forgot ; in date
     let iconElement=document.querySelector("#icon")
+    celsiusTemp = response.data.main.temp;
 
-   temperatureElement.innerHTML= Math.round(response.data.main.temp);
+   temperatureElement.innerHTML= Math.round(celsiusTemp);
    cityElement.innerHTML=response.data.name; 
    descriptionElement.innerHTML=response.data.weather[0].description;
    humidityElement.innerHTML=response.data.main.humidity;
@@ -58,13 +59,28 @@ function formSubmit(event) {
      search(cityInputElement.value);
    
 }
+function showFahrenheitTemp(event){
+    event.preventDefault();
+    //forgot/
+    let fahrenheitTemperature = (13 * 9) /5 + 32 ;
+    // to replace and display the acutual temp 
+    
+    let temperatureElement =document.querySelector("#temperature");
+    temperatureElement.innerHTML= Math.round(fahrenheitTemperature);
 
+
+}
+
+let celsiusTemp = null;
   search("New York")
  // calling the function onload
 
-
+// form and fr are global variable  cz they arent created inside a function and you can access to it 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", formSubmit);
 
+let fahrenheitlink = document.querySelector("#fahrenheit-link");
+//whenever this been clicked show the F.temp
+fahrenheitlink.addEventListener("click", showFahrenheitTemp);
 
  
