@@ -22,8 +22,6 @@ function formatDate(timestamp){
 
 
 function displayweather(response) {
-    console.log(response.data
-        )
    let temperatureElement = document.querySelector("#temperature");
    let cityElement= document.querySelector("#city");
    let descriptionElement=document.querySelector("#description");
@@ -38,17 +36,34 @@ function displayweather(response) {
    descriptionElement.innerHTML=response.data.weather[0].description;
    humidityElement.innerHTML=response.data.main.humidity;
    windElement.innerHTML=Math.round(response.data.wind.speed);
-    dateElement.innerHTML=formatDate(response.data.dt *1000);
-    iconElement.setAttribute("src" ,`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+   dateElement.innerHTML=formatDate(response.data.dt *1000);
+   iconElement.setAttribute("src" ,`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     // made space in src and forgot , btw src and http
     iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-
+   
+// making ajax call
+function search (city){ 
 let apiKey ="dbe2579a231e00f951c0c9e165264e61";
-let city = "London"
- let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
- 
- axios.get(apiUrl).then(displayweather);
+let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+axios.get(apiUrl).then(displayweather);
+ }
+
+function formSubmit(event) {
+    event.preventDefault();
+     let cityInputElement = document.querySelector("#city-input");
+     //to make the acutual search and fetch the data
+     search(cityInputElement);
+   
+}
+
+  search("New York")
+ // calling the function onload
+
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", formSubmit);
+
 
  
