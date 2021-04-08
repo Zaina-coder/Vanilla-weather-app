@@ -62,12 +62,22 @@ function formSubmit(event) {
 function showFahrenheitTemp(event){
     event.preventDefault();
     //forgot/
-    let fahrenheitTemperature = (13 * 9) /5 + 32 ;
+    celsiuslink.classList.remove("active");
+    fahrenheitlink.classList.add("active");
+    let fahrenheitTemperature = (celsiusTemp * 9) /5 + 32 ;
     // to replace and display the acutual temp 
     
     let temperatureElement =document.querySelector("#temperature");
     temperatureElement.innerHTML= Math.round(fahrenheitTemperature);
+}
 
+function showcelsiusTemp(event){
+    event.preventDefault();
+    celsiuslink.classList.add("active");
+    fahrenheitlink.classList.remove("active");
+
+    let temperatureElement = document.querySelector("#temperature");
+    temperatureElement.innerHTML= Math.round(celsiusTemp);
 
 }
 
@@ -82,5 +92,7 @@ form.addEventListener("submit", formSubmit);
 let fahrenheitlink = document.querySelector("#fahrenheit-link");
 //whenever this been clicked show the F.temp
 fahrenheitlink.addEventListener("click", showFahrenheitTemp);
+let celsiuslink = document.querySelector("#celsius-link");
+celsiuslink.addEventListener("click", showcelsiusTemp);
 
  

@@ -54,3 +54,10 @@ li {
   font-size: 16px;
   top: -34px;
 }
+
+.weather-temp active {
+  color: black;
+}
+.weather-temp :hover{
+  text-decoration: none;
+}
