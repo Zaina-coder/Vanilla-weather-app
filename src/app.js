@@ -19,6 +19,35 @@ function formatDate(timestamp){
 
 }
 
+function displayForecast(){
+    //selecing the element 
+    let forecastElement = document.querySelector("#forecast");
+    // to repeat the days of the week forecast we will use loop
+    // creat variable which stores the hTML OF The forecast
+     let forecastHTML = `<div class="row">`;
+     // creating an array that goes into each day 
+     let days = ["Sat", "Sun", "Mon"];
+     days.forEach(function(day) {
+     forecastHTML= forecastHTML +
+ `       <div class="col-2">
+                <div class="weather-forcast-date" >
+                ${day}
+                </div>
+                <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" class="" width="42"/>
+                <div class="weather-forcast-temperature">
+                <span class="weather-forcast-temperature-max">18°</span>
+                 <span class="weather-forcast-temperature-min"> 20°</span>
+              
+           </div>
+              </div>
+            
+          `;
+          // don't forget to close the array
+     });
+          forecastHTML=  forecastHTML + `</div>`
+          forecastElement.innerHTML= forecastHTML;
+     }
+         
 
 
 function displayweather(response) {
@@ -83,6 +112,7 @@ function showcelsiusTemp(event){
 
 let celsiusTemp = null;
   search("New York")
+  displayForecast();
  // calling the function onload
 
 // form and fr are global variable  cz they arent created inside a function and you can access to it 
