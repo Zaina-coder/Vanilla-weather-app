@@ -18,37 +18,57 @@ function formatDate(timestamp){
 
 
 }
+function formatday(timestamp){
+    let date = new Date (timestamp *1000);
+    let day = date.getDay();
+    let days =["Mon", "Tue", "wed", "Thur", "Fri", "Sat", "Sun"];
+     return days[day] ;
+}
 
-function displayForecast(){
+function displayForecast(response){// response is for receving the apicall
     //selecing the element 
+      // creating an array that goes into each day 
+   let forecast = response.data.daily;
     let forecastElement = document.querySelector("#forecast");
     // to repeat the days of the week forecast we will use loop
     // creat variable which stores the hTML OF The forecast
      let forecastHTML = `<div class="row">`;
-     // creating an array that goes into each day 
-     let days = ["Sat", "Sun", "Mon"];
-     days.forEach(function(day) {
-     forecastHTML= forecastHTML +
- `       <div class="col-2">
+   
+   //generating the loop
+     forecast.forEach(function(forecastday,index) {
+         if (index <6){
+     forecastHTML= forecastHTML +` <div class="col-2">
                 <div class="weather-forcast-date" >
-                ${day}
+            
+                ${formatday(forecastday.dt)}
                 </div>
-                <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" class="" width="42"/>
+                <img src="http://openweathermap.org/img/wn/${forecastday.weather[0].icon}@2x.png" alt="" class="" width="42"/>
                 <div class="weather-forcast-temperature">
-                <span class="weather-forcast-temperature-max">18°</span>
-                 <span class="weather-forcast-temperature-min"> 20°</span>
+                <span class="weather-forcast-temperature-max">${Math.round (forecastday.temp.max)}°</span>
+                 <span class="weather-forcast-temperature-min"> ${Math.round(forecastday.temp.min)}°</span>
               
            </div>
               </div>
             
-          `;
+         `;  }
+         
+          //displaying acutal real data from the Api (forecastday(parameter) weather array)
           // don't forget to close the array
      });
-          forecastHTML=  forecastHTML + `</div>`
+          forecastHTML=  forecastHTML + `</div>`  
           forecastElement.innerHTML= forecastHTML;
      }
+    
          
-
+function  getForecast(coordinates){
+    console.log(coordinates);
+    //making the api call
+    let apiKey ="5f472b7acba333cd8a035ea85a0d4d4c";
+    let apiUrl =  `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+    console.log(apiUrl);
+    //hey axios get api url and then display the function (dispaly forecast) 
+    axios.get(apiUrl).then(displayForecast);
+}
 
 function displayweather(response) {
    let temperatureElement = document.querySelector("#temperature");
@@ -70,6 +90,7 @@ function displayweather(response) {
    iconElement.setAttribute("src" ,`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     // made space in src and forgot , btw src and http
     iconElement.setAttribute("alt", response.data.weather[0].description);
+    getForecast(response.data.coord);
 }
 
    
@@ -88,40 +109,16 @@ function formSubmit(event) {
      search(cityInputElement.value);
    
 }
-function showFahrenheitTemp(event){
-    event.preventDefault();
-    //forgot/
-    celsiuslink.classList.remove("active");
-    fahrenheitlink.classList.add("active");
-    let fahrenheitTemperature = (celsiusTemp * 9) /5 + 32 ;
-    // to replace and display the acutual temp 
-    
-    let temperatureElement =document.querySelector("#temperature");
-    temperatureElement.innerHTML= Math.round(fahrenheitTemperature);
-}
 
-function showcelsiusTemp(event){
-    event.preventDefault();
-    celsiuslink.classList.add("active");
-    fahrenheitlink.classList.remove("active");
-
-    let temperatureElement = document.querySelector("#temperature");
-    temperatureElement.innerHTML= Math.round(celsiusTemp);
-
-}
-
-let celsiusTemp = null;
   search("New York")
-  displayForecast();
+ 
  // calling the function onload
 
 // form and fr are global variable  cz they arent created inside a function and you can access to it 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", formSubmit);
 
-let fahrenheitlink = document.querySelector("#fahrenheit-link");
-//whenever this been clicked show the F.temp
-fahrenheitlink.addEventListener("click", showFahrenheitTemp);
+
 let celsiuslink = document.querySelector("#celsius-link");
 celsiuslink.addEventListener("click", showcelsiusTemp);
 
