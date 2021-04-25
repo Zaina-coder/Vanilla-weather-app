@@ -27,8 +27,7 @@ li {
   color: rgd(135, 135, 135);
   font-size: 17px;
   font-weight: 200px;
-
-  line-height: 22px;
+  line-height: 28px;
   margin: 0 auto;
   padding: 0;
 }
@@ -76,4 +75,9 @@ li {
 }
 .weather-forcast-temperature {
   font-size: 13;
+}
+.footer {
+  text-align: center;
+  list-style: none;
+  color: #818a91;
 }
